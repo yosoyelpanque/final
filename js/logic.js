@@ -614,6 +614,19 @@ export function initialize() {
             count++;
         });
         
+        // ESCUCHA DE EVENTOS PERSONALIZADOS (Rompe la dependencia circular)
+    window.addEventListener('inventory-updated', () => {
+        console.log('♻️ Evento recibido: Inventario actualizado');
+        saveState();
+        populateAreaSelects();
+        populateReportFilters();
+        populateBookTypeFilter();
+        filterAndRenderInventory();
+        renderLoadedLists();
+        renderDirectory();
+        renderDashboard();
+    });
+}
         updateSerialNumberCache();
         populateAreaSelects();
         filterAndRenderInventory();
